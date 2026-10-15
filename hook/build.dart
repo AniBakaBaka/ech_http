@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:code_assets/code_assets.dart';
+import 'package:crypto/crypto.dart';
 import 'package:hooks/hooks.dart';
 import 'package:path/path.dart' as p;
 
@@ -81,7 +82,13 @@ Future<void> main(List<String> args) async {
     for (final header in ['dart_native_api.h', 'dart_api.h']) {
       output.dependencies.add(Uri.file(p.join(dartInclude, header)));
     }
-    final nativeBuild = p.join(out, 'native');
+    // A dependency can move between path, hosted and Git locations without
+    // changing the target configuration. CMake caches the source directory.
+    final sourceKey = sha256
+        .convert(utf8.encode(root))
+        .toString()
+        .substring(0, 12);
+    final nativeBuild = p.join(out, 'native-$sourceKey');
     stderr.writeln(
       'ech_http: compiling C++ bridge with prebuilt $target dependencies',
     );

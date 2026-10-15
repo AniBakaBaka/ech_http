@@ -1,8 +1,9 @@
 name: ech_http
 description: An HTTP client with explicit TLS Encrypted Client Hello, proxy support, and a C++ backend bundled through Dart build hooks.
-version: 0.2.1
-repository: https://github.com/ech-research/ech_http
-issue_tracker: https://github.com/ech-research/ech_http/issues
+version: 0.2.2-anibaka.1
+publish_to: none
+repository: https://github.com/AniBakaBaka/ech_http
+issue_tracker: https://github.com/AniBakaBaka/ech_http/issues
 # Deliberately public test-only key; never used by the runtime library.
 false_secrets:
   - /test/fixtures/localhost-key.pem
@@ -22,11 +23,12 @@ topics:
   - networking
 dependencies:
   archive: ^4.0.9
-  code_assets: ^2.1.0
+  code_assets: ^1.2.1
   crypto: ^3.0.6
   ffi: ^2.1.4
-  hooks: ^2.2.0
+  hooks: ^2.0.2
   http: ^1.6.0
+  dio: ^5.11.1
   path: ^1.9.1
 dev_dependencies:
   lints: ^6.0.0

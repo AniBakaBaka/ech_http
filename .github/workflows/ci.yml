@@ -39,7 +39,7 @@ jobs:
         run: |
           dart run tool/check_native_build.dart windows arm64
           dart run tool/check_native_build.dart windows ia32
-      - run: dart pub publish --dry-run
+      # This fork is consumed through pinned Git dependencies.
 
   android:
     if: github.event_name != 'workflow_dispatch' || inputs.platform == 'all' || inputs.platform == 'android'

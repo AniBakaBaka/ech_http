@@ -1,5 +1,9 @@
 # ech_http
 
+这是 AniBaka 组织维护的 [ech-research/ech_http](https://github.com/ech-research/ech_http)
+分支，增加标准 DoH 解析、通用 HTTP/Dio 接入和 Windows/Flutter 构建兼容修复。
+改动及使用说明见 [ANIBAKA_CHANGES.md](ANIBAKA_CHANGES.md)。请通过固定 Git 提交引用。
+
 [![Dart SDK](https://img.shields.io/badge/Dart-3.10+-0175C2.svg?logo=dart)](https://dart.dev)
 [![Flutter](https://img.shields.io/badge/Flutter-3.38+-02569B.svg?logo=flutter)](https://flutter.dev)
 [![Platforms](https://img.shields.io/badge/平台支持-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Linux%20%7C%20Windows-blue.svg)](#支持平台与工具链)

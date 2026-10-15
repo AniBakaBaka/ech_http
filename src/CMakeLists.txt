@@ -15,8 +15,27 @@ if(NOT EXISTS "${EH_DART_INCLUDE}/dart_native_api.h")
 endif()
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/cacert.pem" EH_CA_PEM)
+# MSVC limits individual string literals. Preserve every certificate byte while
+# embedding the bundle as separately appended, bounded literals.
+string(LENGTH "${EH_CA_PEM}" EH_CA_LENGTH)
+set(EH_CA_OFFSET 0)
+set(EH_CA_APPEND "")
+while(EH_CA_OFFSET LESS EH_CA_LENGTH)
+  math(EXPR EH_CA_REMAINING "${EH_CA_LENGTH} - ${EH_CA_OFFSET}")
+  if(EH_CA_REMAINING GREATER 8000)
+    set(EH_CA_CHUNK_LENGTH 8000)
+  else()
+    set(EH_CA_CHUNK_LENGTH ${EH_CA_REMAINING})
+  endif()
+  string(SUBSTRING "${EH_CA_PEM}" ${EH_CA_OFFSET} ${EH_CA_CHUNK_LENGTH} EH_CA_CHUNK)
+  string(APPEND EH_CA_APPEND "    result.append(R\"ECH_CA_BUNDLE(${EH_CA_CHUNK})ECH_CA_BUNDLE\");\n")
+  math(EXPR EH_CA_OFFSET "${EH_CA_OFFSET} + ${EH_CA_CHUNK_LENGTH}")
+endwhile()
 configure_file(ca_bundle.h.in "${CMAKE_CURRENT_BINARY_DIR}/ca_bundle.h" @ONLY)
 add_library(ech_http SHARED ech_http.cpp)
+if(MSVC)
+  target_compile_options(ech_http PRIVATE /utf-8)
+endif()
 # Imported includes default to -isystem, which can lose to a host OpenSSL
 # installation in /usr/local/include. Always prefer this SDK's pinned headers.
 set_target_properties(ech_http PROPERTIES NO_SYSTEM_FROM_IMPORTED ON)

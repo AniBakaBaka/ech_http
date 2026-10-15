@@ -1,5 +1,10 @@
 # ech_http
 
+AniBaka organization fork of [ech-research/ech_http](https://github.com/ech-research/ech_http).
+This fork adds RFC 8484 DoH, reusable HTTP/Dio integration, and Windows/Flutter
+build compatibility fixes. See [changes and usage](ANIBAKA_CHANGES.md).
+Consume this fork through a pinned Git commit; it is not published to pub.dev.
+
 [![Dart SDK](https://img.shields.io/badge/Dart-3.10+-0175C2.svg?logo=dart)](https://dart.dev)
 [![Flutter](https://img.shields.io/badge/Flutter-3.38+-02569B.svg?logo=flutter)](https://flutter.dev)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Linux%20%7C%20Windows-blue.svg)](#supported-platforms-and-toolchain)
